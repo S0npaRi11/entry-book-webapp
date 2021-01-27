@@ -29,10 +29,10 @@ const SendMessageForm = () => {
         <form onSubmit={ onSubmit }>
             {/* Recipient's ID (for now, will be chaged to email later) */}
             <br />
-            <input type='text' id='recipient-id' value={ idValue } onChange={ (e) => setIdValue(e.target.value ) } placeholder=' Please enter the id.'/>
+            <input type='text' className='form-control' id='recipient-id' value={ idValue } onChange={ (e) => setIdValue(e.target.value ) } placeholder=' Please enter the id.'/>
 
             {/* Message */}
-            <input type='text' id='recipient-id' value={ message } onChange={ (e) => setMessage(e.target.value ) } placeholder=' Please enter the id.'/>
+            <input type='text' className='form-control' id='recipient-id' value={ message } onChange={ (e) => setMessage(e.target.value ) } placeholder=' Please enter the message.'/>
 
             <input type='submit' className='btn btn-primary' value='Send Message'/>
 
