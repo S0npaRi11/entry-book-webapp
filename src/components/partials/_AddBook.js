@@ -1,21 +1,29 @@
 import { useState } from 'react';
 
-const AddBook = () => {
+//import { createOne } from '../../controllers/book'
+
+const AddBook = ({ token, addBook, user }) => {
 
     const [bookTitle, setBookTitle] = useState('');
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         if(!bookTitle){
             alert('Please give the book a title');
             return
         }
 
+        console.log(user)
+
         // here, we will create a new book
+        const formData = {
+            creatorID: user,
+            title: bookTitle,
+            users: user
+        }
 
-        // for now, console.log the title
-        console.log(bookTitle);
-
+        addBook(token, formData)
+    
         // reset the input.value
         setBookTitle(''); 
     }

@@ -1,5 +1,9 @@
 import { useState } from 'react';
- import Row  from 'react-bootstrap/Row';
+import { Link, useHistory } from 'react-router-dom'
+import Row  from 'react-bootstrap/Row';
+
+// importing regsiter user function
+import { register } from '../controllers/user'
 
 const Register = () => {
 
@@ -9,9 +13,12 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const history = useHistory();
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
+
+      
 
         if(!firstName&& !lasttName && !mobileNumber && !email && !password){
             alert(' Please fill in the required fields. ')
@@ -19,16 +26,21 @@ const Register = () => {
         }
 
         // here we will register the user
+        const formData = {
+            firstName: firstName,
+            lastName: lasttName,
+            mobileNumber: mobileNumber,
+            email: email,
+            password: password
+        }
 
-        // for now, console.log the information
-        console.log('frist name : ', firstName)
-        console.log('last name : ', lasttName)
-        console.log('mobile number : ', mobileNumber)
-        console.log('email : ', email)
-        console.log('password : ', password)
-
+        const user = await register(formData)
+        
+        user.json().then(data => {
+            history.push('/')
+        })
+    
         // set the fields to blank
-
         setFirstName('')
         setLastName('')
         setMobileNumber('')
@@ -73,6 +85,9 @@ const Register = () => {
                 <br />
 
                 <input type='submit' className='btn btn-primary btn-block' value='register' />
+                <br />
+
+                <p> Already refistered? <Link to='/'> Login here. </Link> </p>
             </form>
         </div>
     )

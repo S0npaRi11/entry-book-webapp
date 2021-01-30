@@ -1,52 +1,102 @@
 // import Container from 'react-bootstrap/Container';
-import { BrowserRouter as Router, Route,Switch } from 'react-router-dom';
-import Login from "./components/Login";
+import { useState } from 'react'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+// import Login from "./components/Login";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
 import BookDashboard from "./components/BookDashboard";
 import Profile from "./components/Profile";
 import Messages from "./components/Messages";
 
-// testing
+import { logIn } from './controllers/user'
 
 import './App.css';
 
 function App() {
 
-  return (
-    <>
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [redirect, setRedirect] = useState(false)
+  // const [token, setToken] = useState('')
+  // const [user, setUser] = useState({})
 
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    if(!email && !password){
+      alert(' Invalid Request ')
+      return
+    }
+  
+    // here goes the function which will be used to log in
+    const formData = {
+      email: email,
+      password: password
+    }
+  
+    const data = await logIn(formData)
+
+    if(data){
+      document.cookie = `token=${data.result[0]};max-age=86400,domain=localhost:3000`
+      document.cookie = `entry-app-user-id=${data.result[1]._id};max-age=86400,domain=localhost:3000`
+      document.cookie = `entry-app-user-name=${data.result[1].firstName + ' '+data.result[1].lastName};max-age=86400,domain=localhost:3000`
+      document.cookie = `entry-app-user-email=${data.result[1].email};max-age=86400,domain=localhost:3000`
+
+      setRedirect(true)
+    }
+
+    setEmail('')
+    setPassword('')
+  }
+
+  return (
     <Router>
-      <Switch>
-       
-        <Route path='/register'>
+        <Route exact path='/' render = {(props) => (
+          <>
+          {redirect ? <Redirect push to='/user' component = {UserDashboard}/> :
+              <div className="signin-form-wrapper">
+                <form onSubmit={ onSubmit } className='form-signin pt-3 pb-3'>
+                  <h1 className="page-title mb-3 font-weight-normal"> Sign In </h1>
+                  <div>
+                    <label htmlFor='email'> Email </label>
+                    <input type='email' id='email' required className="form-control" placeholder='Enter Email' value={ email } onChange={ (e) => setEmail(e.target.value) }/>
+                  </div>
+                  <br />
+                  <div>
+                    <label htmlFor='password'> Password </label>
+                    <input type='password' id='password' required className="form-control" placeholder='enter password'  value={ password } onChange={ (e) => setPassword(e.target.value)}/>
+                  </div>
+                  <br />
+                  <input type="submit" className='btn btn-primary btn-block' value='Log In' />
+                  <br />
+                  <p className='align-right'> Not registered? <Link to='/register'> Register here </Link> </p>
+                </form>
+              </div>
+            }
+          </>
+        )}>
+        </Route>
+
+        <Route exact path='/register'>
           <Register />
         </Route>
 
-        <Route path='/user'>
+        <Route exact path='/user'>
           <UserDashboard />
         </Route>
 
-        <Route path='/book'>
-          <BookDashboard />
+        <Route exact path='/book'>
+          <BookDashboard  />
         </Route>
 
-        <Route path='/profile'>
+        <Route exact path='/profile'>
           <Profile />
         </Route>
 
-        <Route path='/messages'>
+        <Route exact path='/messages'>
           <Messages />
         </Route>
-
-        <Route strict exact path='/'>
-          <Login /> 
-        </Route>
-
-      </Switch>
     </Router>
-    
-    </>
   );
 }
 
