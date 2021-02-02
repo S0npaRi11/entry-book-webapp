@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/entry-book-webapp/static/css/main.315d9b14.chunk.css",
+    "main.js": "/entry-book-webapp/static/js/main.924e45c0.chunk.js",
+    "main.js.map": "/entry-book-webapp/static/js/main.924e45c0.chunk.js.map",
+    "runtime-main.js": "/entry-book-webapp/static/js/runtime-main.68ff401c.js",
+    "runtime-main.js.map": "/entry-book-webapp/static/js/runtime-main.68ff401c.js.map",
+    "static/css/2.31ff0196.chunk.css": "/entry-book-webapp/static/css/2.31ff0196.chunk.css",
+    "static/js/2.ceaf054e.chunk.js": "/entry-book-webapp/static/js/2.ceaf054e.chunk.js",
+    "static/js/2.ceaf054e.chunk.js.map": "/entry-book-webapp/static/js/2.ceaf054e.chunk.js.map",
+    "static/js/3.7325fc88.chunk.js": "/entry-book-webapp/static/js/3.7325fc88.chunk.js",
+    "static/js/3.7325fc88.chunk.js.map": "/entry-book-webapp/static/js/3.7325fc88.chunk.js.map",
+    "index.html": "/entry-book-webapp/index.html",
+    "static/css/2.31ff0196.chunk.css.map": "/entry-book-webapp/static/css/2.31ff0196.chunk.css.map",
+    "static/css/main.315d9b14.chunk.css.map": "/entry-book-webapp/static/css/main.315d9b14.chunk.css.map",
+    "static/js/2.ceaf054e.chunk.js.LICENSE.txt": "/entry-book-webapp/static/js/2.ceaf054e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.68ff401c.js",
+    "static/css/2.31ff0196.chunk.css",
+    "static/js/2.ceaf054e.chunk.js",
+    "static/css/main.315d9b14.chunk.css",
+    "static/js/main.924e45c0.chunk.js"
+  ]
+}
