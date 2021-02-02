@@ -36,7 +36,7 @@ function App() {
   
     const data = await logIn(formData)
 
-    if(data){
+    if(data !== null){
       document.cookie = `token=${data.result[0]};max-age=86400,domain=localhost:3000`
       document.cookie = `entry-app-user-id=${data.result[1]._id};max-age=86400,domain=localhost:3000`
       document.cookie = `entry-app-user-name=${data.result[1].firstName + ' '+data.result[1].lastName};max-age=86400,domain=localhost:3000`

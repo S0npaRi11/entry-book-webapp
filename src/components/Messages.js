@@ -12,7 +12,7 @@ import getCookie from '../controllers/additionals'
 const Messages = () => {
 
     const [messageFormToggle, setMessageFormToggle] = useState(false);
-    const [messages, setMessages] = useState(false);
+    const [messages, setMessages] = useState([]);
 
     const token = getCookie('token')
     // const userID = getCookie('entry-app-user-id');
