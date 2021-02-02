@@ -38,13 +38,21 @@ const BookDashboard = () => {
 
     useEffect(() => {
         const requiredBook = async () => {
-            const book = await readOne(token, bookID)
-            setBookTitle(book.result.title)
-            setEntries(book.result.entries)
+           try {
+                const book = await readOne(token, bookID)
+                if(book.result !== null){
+                    setBookTitle(book.result.title)
+                    setEntries(book.result.entries)
+                }else{
+                    history.push('/500')
+                }
+           } catch (error) {
+               history.push('/500')
+           }
         }
 
         requiredBook()
-    }, [entries, token, bookID])
+    }, [entries, token, bookID, history])
 
     // add entry function
     const addEntry = async (bookID, token, formData) => {

@@ -1,12 +1,13 @@
 // import Container from 'react-bootstrap/Container';
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
-// import Login from "./components/Login";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
 import BookDashboard from "./components/BookDashboard";
 import Profile from "./components/Profile";
 import Messages from "./components/Messages";
+import Error404 from "./components/404";
+import Error500 from "./components/500";
 
 import { logIn } from './controllers/user'
 
@@ -17,8 +18,7 @@ function App() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [redirect, setRedirect] = useState(false)
-  // const [token, setToken] = useState('')
-  // const [user, setUser] = useState({})
+  const [redirectTo500, setRedirectTo500] = useState(false)
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -36,8 +36,6 @@ function App() {
   
     const data = await logIn(formData)
 
-    console.log(data)
-
     if(data){
       document.cookie = `token=${data.result[0]};max-age=86400,domain=localhost:3000`
       document.cookie = `entry-app-user-id=${data.result[1]._id};max-age=86400,domain=localhost:3000`
@@ -45,6 +43,8 @@ function App() {
       document.cookie = `entry-app-user-email=${data.result[1].email};max-age=86400,domain=localhost:3000`
 
       setRedirect(true)
+    }else{
+      setRedirectTo500(true)
     }
 
     setEmail('')
@@ -55,6 +55,7 @@ function App() {
     <Router>
         <Route exact path='/' render = {(props) => (
           <>
+          { redirectTo500 &&  <Redirect push to='/error500' component = {Error500}/>}
           {redirect ? <Redirect push to='/user' component = {UserDashboard}/> :
               <div className="signin-form-wrapper">
                 <form onSubmit={ onSubmit } className='form-signin pt-3 pb-3'>
@@ -97,6 +98,14 @@ function App() {
 
         <Route exact path='/messages'>
           <Messages />
+        </Route>
+
+        <Route exact path='/404'>
+          <Error404 />
+        </Route>
+
+        <Route exact path='/500'>
+          <Error500 />
         </Route>
     </Router>
   );

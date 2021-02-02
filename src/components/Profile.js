@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Header from './partials/_Header'
 import UpdateUser from './partials/_UpdateUser'
-// import MessagesList from './partials/_MessagesList'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
@@ -18,19 +18,25 @@ const Profile = () => {
     const userID = getCookie('entry-app-user-id');
     const userName = getCookie('entry-app-user-name');
 
+    const history = useHistory()
 
     useEffect(() => {
         const readLoggedInUser = async () => {
-            const data = await readOne(userID, token)
-            console.log(data)
-            // loggedUser.email = data.result.email
-            // loggedUser.mobileNumber = data.result.mobileNumber
-            setEmail(data.result.email)
-            setMNO(data.result.mobileNumber)
+           try {
+                const data = await readOne(userID, token) 
+                if(data.result !== null){
+                    setEmail(data.result.email)
+                    setMNO(data.result.mobileNumber)
+                }else{
+                    history.push('/500')
+                }
+           } catch (error) {
+               history.push('/500')
+           }
         }
 
         readLoggedInUser()
-    },[userID, token])
+    },[userID, token,history])
 
     // update user password
     const updatePass = async (userID, token, formData) => {

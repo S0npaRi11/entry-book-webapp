@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import MessagesList from './partials/_MessagesList'
 import SendMessageForm from './partials/_SendMessageForm'
 import Header from './partials/_Header'
@@ -17,14 +18,24 @@ const Messages = () => {
     // const userID = getCookie('entry-app-user-id');
     const userName = getCookie('entry-app-user-name');
 
+    const history = useHistory()
+
     useEffect(() => {
         const getMessages = async() => {
-            const data = await readAllMessages(token)
-            setMessages(data.result)
+            try {
+                const data = await readAllMessages(token)
+                if(data.result !== null){
+                    setMessages(data.result)
+                }else{
+                    history.push('/500')
+                }
+            } catch (error) {
+                history.push('/500')
+            }
         }
 
         getMessages()
-    },[token])
+    },[token, history])
 
     // send message function
     const sendMessage = async(token, receiverID, formData) => {

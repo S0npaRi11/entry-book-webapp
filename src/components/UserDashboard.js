@@ -31,12 +31,19 @@ const Dashboard = () => {
     // use onEffect to get all the books of the user
     useEffect(() => {
         const fetchedBooks = async () => {
-            const allBooks = await readAllBooks(token)
-            // console.log(allBooks)
-            setBooks(allBooks.result)
+           try {
+                const allBooks = await readAllBooks(token)
+                if(allBooks.result !== null){
+                    setBooks(allBooks.result)
+                }else{
+                    history.push('/500')
+                }
+           } catch (error) {
+                history.push('/500')   
+           }
         }
         fetchedBooks()
-    }, [books,token])
+    }, [books,token,history])
 
     // Add Book function
     const addBook = async (token, formData) => {
