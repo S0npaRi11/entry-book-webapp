@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const UpdateUser = () => {
+const UpdateUser = ({ onUpdate, userID, token }) => {
 
     const [password, setPassword] = useState('')
 
@@ -13,6 +13,11 @@ const UpdateUser = () => {
         }
 
         // here we update password
+        const formData = {
+            password: password
+        }
+
+        onUpdate(userID, token, formData)
 
         //for now, console,log the password
         console.log(password);

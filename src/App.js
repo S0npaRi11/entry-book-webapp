@@ -36,6 +36,8 @@ function App() {
   
     const data = await logIn(formData)
 
+    console.log(data)
+
     if(data){
       document.cookie = `token=${data.result[0]};max-age=86400,domain=localhost:3000`
       document.cookie = `entry-app-user-id=${data.result[1]._id};max-age=86400,domain=localhost:3000`
@@ -85,7 +87,7 @@ function App() {
           <UserDashboard />
         </Route>
 
-        <Route exact path='/book'>
+        <Route exact path='/book/:bookID'>
           <BookDashboard  />
         </Route>
 

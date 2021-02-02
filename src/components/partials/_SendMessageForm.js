@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const SendMessageForm = () => {
+const SendMessageForm = ({ onAdd, token }) => {
 
     const [idValue, setIdValue] = useState('')
     const [message, setMessage] = useState('')
@@ -15,6 +15,11 @@ const SendMessageForm = () => {
         }
 
         // here we will send the message
+        const formData = {
+            msg: message
+        }
+
+        onAdd(token ,idValue, formData)
 
         // for now, console.log the id and the message
         console.log('id ', idValue)

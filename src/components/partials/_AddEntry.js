@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 
-const AddEntry = () => {
+const AddEntry = ({ onAdd, bookID, token, userID }) => {
 
     const [entryTitle, setEntryTitle] = useState('');
     const [entryType, setEntryType] = useState('paid');
@@ -16,18 +16,17 @@ const AddEntry = () => {
             return
         }
 
-        // if(entryType !== 'paid' || entryType !== 'received'|| entryType !== 'dept'){
-        //     alert('Entry types can only be: PAID or RECEIVED or DEPT')
-        //     return
-        // }
+        const formData = {
+            entryTitle: entryTitle,
+            amount: amount,
+            type: entryType,
+            recipient: recipient,
+            entryCreatorID: userID,
+            bookID: bookID
+        }
 
         // This is where we add new entry
-
-        //For now, console.log the data
-        console.log('entryTitle',entryTitle)
-        console.log('entryType',entryType)
-        console.log('recipient',recipient)
-        console.log('amount',amount)
+        onAdd(bookID, token,formData)
 
         // reset the values
         setEntryTitle('');
@@ -49,11 +48,11 @@ const AddEntry = () => {
                 </div>
                 <div className='col-sm-6'>
                     <br />
-                    <input type='text' id='recipient' className='form-control' value={ recipient } onChange={ (e) => setRecipient(e.target.value) } placeholder='Enter Title' required/>
+                    <input type='text' id='recipient' className='form-control' value={ recipient } onChange={ (e) => setRecipient(e.target.value) } placeholder='Enter recipient' required/>
                 </div>
                 <div className='col-sm-6'>
                     <br />
-                    <input type='number' id='amount' className='form-control' value={ amount } onChange={ (e) => setAmount(e.target.value) } placeholder='Enter Title' required/>
+                    <input type='number' id='amount' className='form-control' value={ amount } onChange={ (e) => setAmount(e.target.value) } placeholder='Enter amount' required/>
                 </div>
             </Row>
 

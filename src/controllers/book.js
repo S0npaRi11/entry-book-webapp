@@ -18,8 +18,8 @@ export const readAll = readAllBooks
 
 // read a book
 const readOneBook = async(token, bookID) => {
-    const id = typeof(bookID) === 'string' ? bookID : bookID.toString();
-    const data = await fetch(URL+'/book/'+id,{
+    // const id = typeof(bookID) === 'string' ? bookID : bookID.toString();
+    const data = await fetch(URL+'/book/'+bookID,{
         headers:{
             'auth-token': token
         }
@@ -48,8 +48,8 @@ export const createOne = createOneBook
 
 // update a book 
 const updateOneBook = async(token, bookID,formData) => {
-    const id = typeof(bookID) === 'string' ? bookID : bookID.toString();
-    const data = await fetch(URL+'/book/'+id,{
+    // const id = typeof(bookID) === 'string' ? bookID : bookID.toString();
+    const data = await fetch(URL+'/book/'+bookID,{
         method: 'PATCH',
         headers:{
             'Content-Type':'application/json',
@@ -65,8 +65,8 @@ export const updateOne = updateOneBook
 
 // delete a book
 const deleteOneBook = async(token, bookID) => {
-    const id = typeof(bookID) === 'string' ? bookID : bookID.toString()
-    const data = await fetch(URL+'/book/'+id,{
+    // const id = typeof(bookID) === 'string' ? bookID : bookID.toString()
+    const data = await fetch(URL+'/book/'+bookID,{
         method: 'DELETE',
         headers:{
             'auth-token': token
@@ -80,8 +80,8 @@ export const deleteOne = deleteOneBook
 
 // view all users of the book
 const readAllUsersOfBook = async(token, bookID) => {
-    const id = typeof(bookID) === 'string' ? bookID : bookID.toString()
-    const data = await fetch(URL+'/book/user/'+id,{
+    // const id = typeof(bookID) === 'string' ? bookID : bookID.toString()
+    const data = await fetch(URL+'/book/user/'+bookID,{
         headers:{
             'auth-token': token
         }
@@ -92,8 +92,7 @@ const readAllUsersOfBook = async(token, bookID) => {
 
 export const readAllUsers = readAllUsersOfBook
 
-// making book object for default export
-
+// default export
 const book = {
     readAll: readAllBooks,
     readOne: readOneBook,

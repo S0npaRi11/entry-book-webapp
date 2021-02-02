@@ -1,15 +1,14 @@
 import Row from 'react-bootstrap/Row'
 import Message from './_Message'
 
-const _MessagesList = () => {
+const _MessagesList = ({ messages, token, onDelete }) => {
     return (
         <Row>
-            <div className='col-sm-6'>
-                <Message />
-            </div>
-            <div className='col-sm-6'>
-                <Message />
-            </div>
+            {messages.length === 0 ? 'No messages found' : 
+                messages.map((message) => (
+                    <Message key = { message._id } message = { message } token = { token } onDelete = { onDelete }/>
+                ))
+            }
         </Row>
     )
 }

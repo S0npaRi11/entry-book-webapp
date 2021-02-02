@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const UpdateEntry = () => {
+const UpdateEntry = ({ onUpdate, bookID, entry, token }) => {
 
     const [entryValue, setEntryValue] = useState(0)
 
@@ -13,10 +13,11 @@ const UpdateEntry = () => {
         }
 
         // here we will update the entry value
+        const formData = entry
+        formData.amount = entryValue
 
-        // for now, console.log the value
-        console.log(entryValue);
-
+        const data = onUpdate(bookID, entry._id, token, formData)
+        console.log(data)
         // reset the field
         setEntryValue(0);
     }

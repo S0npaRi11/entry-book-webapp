@@ -1,18 +1,20 @@
 import Card from 'react-bootstrap/Card'
 
-const Message = () => {
+const Message = ({ message,token, onDelete }) => {
     return (
-        <Card>
+        <div className='col-md-6'>
+            <Card>
             <Card.Body>
                 <Card.Title className='message-text'>
-                    Message Text
+                   { message.meg }
                 </Card.Title>
                 <Card.Subtitle className='message-sender'>
-                    Message Sender / Author
+                    { message.senderFirstName + ' ' +  message.senderLastName }
                 </Card.Subtitle>
-                <Card.Link href='#'> Delete </Card.Link>
+                <Card.Link onClick ={ () =>  onDelete(token, message._id)}> Delete </Card.Link>
             </Card.Body>    
         </Card>
+        </div>
     )
 }
 

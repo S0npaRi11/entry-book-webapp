@@ -41,14 +41,14 @@ const Dashboard = () => {
     // Add Book function
     const addBook = async (token, formData) => {
         const data = await createOne(token,formData)
-        console.log(data)
         setBooks([...books, data.result])
     }
 
     // Delete book function
     const deleteBook = async (token, id) => {
-        const data = await deleteOne(token, id)
-        setBooks([...books, data.result])
+        await deleteOne(token, id)
+        // setBooks([...books, data.result])
+        setBooks(books.filter((book) => book._id !== id))
     }
 
 

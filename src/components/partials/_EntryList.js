@@ -1,15 +1,14 @@
 import Row from 'react-bootstrap/Row'
 import Entries from './_Entries'
 
-const EntryList = () => {
+const EntryList = ({ entries, token, bookID, onDelete, onUpdate }) => {
     return (
         <Row className='entry-list'>
-            <div className='col-sm-6'>
-                <Entries />
-            </div>
-            <div className='col-sm-6'>
-                <Entries />
-            </div>
+            {entries.length === 0 ?  'No entries found' 
+                :entries.map((entry) => (
+                    <Entries key = { entry._id } token ={ token } bookID = { bookID } entry ={ entry } onDelete = { onDelete } onUpdate = { onUpdate }/>
+                ))
+            }
         </Row>
     )
 }

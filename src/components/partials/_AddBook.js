@@ -13,8 +13,6 @@ const AddBook = ({ token, addBook, user }) => {
             return
         }
 
-        console.log(user)
-
         // here, we will create a new book
         const formData = {
             creatorID: user,

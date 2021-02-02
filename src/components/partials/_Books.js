@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 
@@ -31,7 +32,8 @@ const Books = ({ book, onDelete, token }) => {
                         </div>
                     </Row>
                 </Card.Text>
-                <Card.Link onClick = {() => onDelete(token, book._id) }> Delete </Card.Link>
+                <Card.Link className='btn btn-primary' onClick = {() => onDelete(token, book._id) }> Delete </Card.Link>
+                <Link to= { `/book/${book._id}` } className='btn btn-success card-link' > More info </Link>
             </Card.Body>
         </Card>
         </div>

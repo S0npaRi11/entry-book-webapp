@@ -20,10 +20,9 @@ const createUser = async (formData) => {
 export const register = createUser;
 
 // read a single user with id
-
 const readOneUser = async(userID,token) => {
-    const id = typeof(userID) === 'string' ? userID : userID.toString();
-    const data = await fetch(URL+'/user/'+id,{
+    // const id = typeof(userID) === 'string' ? userID : userID.toString();
+    const data = await fetch(URL+'/user/'+userID,{
         headers:{
             'auth-token': token
         }
@@ -35,10 +34,9 @@ const readOneUser = async(userID,token) => {
 export const readOne = readOneUser
 
 // update a single user with id
-
 const updateOneUser = async(userID,token, formData) => {
-    const id = typeof(userID) === 'string' ? userID : userID.toString();
-    const data = await fetch(URL+'/user/'+id,{
+    // const id = typeof(userID) === 'string' ? userID : userID.toString();
+    const data = await fetch(URL+'/user/'+userID,{
         method: 'PATCH',
         headers:{
             'Content-Type':'application/json',
@@ -53,7 +51,6 @@ const updateOneUser = async(userID,token, formData) => {
 export const updateOne = updateOneUser
 
 // delete a single user with id
-
 const deleteOneUser = async(userID,token) => {
     const id = typeof(userID) === 'string' ? userID : userID.toString();
     const data = await fetch(URL+'/user/'+id,{
@@ -69,7 +66,6 @@ const deleteOneUser = async(userID,token) => {
 export const deleteOne = deleteOneUser
 
 // login
-
 const logInUser = async(formData) => {
     const data = await fetch(URL+'/user/login',{
         method: 'POST',
@@ -85,7 +81,6 @@ const logInUser = async(formData) => {
 export const logIn = logInUser
 
 // read all users
-
 const readAllUsers = async (token) => {
     const data = await fetch(URL+'/user',{
         headers:{
@@ -99,7 +94,6 @@ const readAllUsers = async (token) => {
 export const readAll = readAllUsers
 
 // view all the books of the user
-
 const readAllBooksOfUser = async(token) => {
     const data = await fetch(URL+'/user/books',{
         headers:{
@@ -113,7 +107,6 @@ const readAllBooksOfUser = async(token) => {
 export const readAllBooks = readAllBooksOfUser
 
 // read messages
-
 const readAllMessagesOfUser = async(token) => {
     const data = await fetch(URL+'/user/messages',{
         headers:{
@@ -127,10 +120,9 @@ const readAllMessagesOfUser = async(token) => {
 export const readAllMessages = readAllMessagesOfUser    
 
 // read a single message
-
 const readOneMessageOfUser = async (token,userID) => {
-    const id = typeof(userID) === 'string' ? userID : userID.toString();
-    const data = await fetch(URL+'/user/message/'+id,{
+    // const id = typeof(userID) === 'string' ? userID : userID.toString();
+    const data = await fetch(URL+'/user/message/'+userID,{
         headers:{
             'auth-token': token
         }
@@ -143,10 +135,9 @@ const readOneMessageOfUser = async (token,userID) => {
 export const readOneMessage = readOneMessageOfUser
 
 // delete message
-
-const deleteOneMessageOfUser = async (token,userID) => {
-    const id = typeof(userID) === 'string' ? userID : userID.toString();
-    const data = await fetch(URL+'/user/message/'+id,{
+const deleteOneMessageOfUser = async (token,messageID) => {
+    // const id = typeof(userID) === 'string' ? userID : userID.toString();
+    const data = await fetch(URL+'/user/message/'+messageID,{
         method: 'DELETE',
         headers:{
             'auth-token': token
@@ -160,10 +151,9 @@ const deleteOneMessageOfUser = async (token,userID) => {
 export const deleteOneMessage = deleteOneMessageOfUser
 
 // send a message
-
-const sendOneMessageOfUser = async (token,userID,formData) => {
-    const id = typeof(userID) === 'string' ? userID : userID.toString();
-    const data = await fetch(URL+'/user/message/'+id,{
+const sendOneMessageOfUser = async (token,senderID,formData) => {
+    // const id = typeof(userID) === 'string' ? userID : userID.toString();
+    const data = await fetch(URL+'/user/message/'+senderID,{
         method: 'POST',
         headers:{
             'Content-Type':'application/json',
@@ -179,10 +169,9 @@ const sendOneMessageOfUser = async (token,userID,formData) => {
 export const sendOneMessage = sendOneMessageOfUser
 
 // reaquest a book
-
 const requestBookToUser = async (token, bookID) => {
-    const id = typeof(bookID) === 'string' ? bookID : bookID.toString()
-    const data = await fetch(URL+'/user/request/'+id,{
+    // const id = typeof(bookID) === 'string' ? bookID : bookID.toString()
+    const data = await fetch(URL+'/user/request/'+bookID,{
         headers:{
             'auth-token': token
         }
@@ -193,6 +182,7 @@ const requestBookToUser = async (token, bookID) => {
 
 export const requestBook = requestBookToUser
 
+// default export 
 const user = {
     register: createUser,
     logIn: logInUser,
@@ -209,4 +199,3 @@ const user = {
 }
 
 export default user
-
